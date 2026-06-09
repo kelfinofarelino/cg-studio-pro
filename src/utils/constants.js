@@ -1,0 +1,34 @@
+export const TOOLS = {
+  CURSOR: 'CURSOR',
+  PEN: 'PEN',
+  ERASER: 'ERASER',
+  FILL: 'FILL',
+  LINE: 'LINE',
+  RECTBOX: 'RECTBOX',
+  TRIANGLEBOX: 'TRIANGLEBOX',
+  ELLIPSEBOX: 'ELLIPSEBOX'
+};
+
+export const SHAPES = {
+  LINE: 'LINE',
+  RECT: 'RECT',
+  SQUARE: 'SQUARE',
+  TRIANGLE_EQUILATERAL: 'TRIANGLE_EQUILATERAL',
+  TRIANGLE_ISOSCELES: 'TRIANGLE_ISOSCELES', // Tambahan varian metode sama kaki
+  TRIANGLE_RIGHT: 'TRIANGLE_RIGHT',
+  TRIANGLE_SCALENE: 'TRIANGLE_SCALENE',
+  CIRCLE: 'CIRCLE',
+  ELLIPSE: 'ELLIPSE'
+};
+
+export const LINE_STYLES = {
+  SOLID: 'solid',
+  DASHED: 'dashed',
+  DOTTED: 'dotted',
+  DASH_DOTTED: 'dash-dotted'
+};
+
+export const ALGORITHMS = {
+  BRESENHAM: 'bresenham',
+  DDA: 'dda'
+};

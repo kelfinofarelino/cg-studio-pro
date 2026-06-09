@@ -1,0 +1,218 @@
+:root {
+    --bg-dark: #12131a;
+    --panel-bg: #1e202b;
+    --panel-border: #2d3142;
+    --accent-color: #3b82f6;
+    --text-main: #f3f4f6;
+    --text-muted: #858da3;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow: hidden;
+    height: 100vh;
+}
+
+.top-bar {
+    height: 45px;
+    background: var(--panel-bg);
+    border-bottom: 1px solid var(--panel-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    position: relative;
+    z-index: 50;
+}
+
+.main-container {
+    display: flex;
+    height: calc(100vh - 45px);
+    width: 100vw;
+    position: relative;
+}
+
+.panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    overflow: visible !important; /* Memastikan Tooltip menyembul keluar panel */
+}
+
+.left-panel {
+    width: 55px;
+    height: 100%;
+    gap: 10px;
+    align-items: center;
+    border-top: none; border-bottom: none; border-left: none;
+}
+
+.workspace {
+    flex: 1;
+    background-color: #161720;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 25px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.artboard-wrapper {
+    background: white;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.right-sidebar {
+    width: 260px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--panel-border);
+    background: var(--panel-bg);
+    overflow: hidden; /* Mengunci agar sidebar tidak jebol keluar screen */
+}
+
+/* --- PANEL PROPERTI ATAS (OTOMATIS MENYESUAIKAN ISI KONTROL) --- */
+.right-top-panel {
+    width: 100% !important;
+    height: auto !important; /* Mengikuti tinggi asli konten kontrol agar tidak clipping/terpotong */
+    border: none !important;
+    border-bottom: 1px solid var(--panel-border) !important;
+    gap: 12px;
+    flex: 0 0 auto; /* Mengunci ukuran agar tidak mengecil saat ditarik flex */
+    overflow: visible !important; /* Tetap visible untuk wadah Balon Tooltip */
+}
+
+/* --- PANEL LAYER BAWAH (FLEKSIBEL MENGISI SISA RUANG) --- */
+.right-bottom-panel {
+    width: 100% !important;
+    flex: 1 1 auto; /* Otomatis mengambil semua sisa space layar yang ada */
+    height: auto !important; /* Lepas kaitan 50% rigid kemarin */
+    position: relative !important;
+    border: none !important;
+    min-height: 0; /* Kunci flexbox modern agar container layer bisa scrolling internal */
+    display: flex;
+    flex-direction: column;
+}
+
+.tool-btn {
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.tool-btn:hover { background: rgba(255,255,255,0.05); }
+.tool-btn.active { background: var(--accent-color); color: white; }
+
+/* REPARASI INDIKATOR SEGITIGA FLYOUT SEKTOR GEOMETRI */
+.tool-btn.has-flyout::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    border-style: solid;
+    border-width: 0 0 5px 5px;
+    border-color: transparent transparent var(--text-muted) transparent;
+}
+.tool-btn.active.has-flyout::after {
+    border-color: transparent transparent white transparent;
+}
+
+.flyout-menu {
+    position: absolute;
+    top: 0;
+    background: #1a1c26;
+    border: 1px solid var(--panel-border);
+    border-radius: 4px;
+    padding: 4px;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 999;
+}
+
+.flyout-item {
+    padding: 6px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+.flyout-item:hover { background: var(--accent-color); }
+
+.control-group { display: flex; flex-direction: column; gap: 4px; }
+label { font-size: 10px; color: var(--text-muted); font-weight: bold; text-transform: uppercase; }
+select, input[type="range"], input[type="number"] {
+    width: 100%; background: #12131a; border: 1px solid var(--panel-border);
+    color: var(--text-main); padding: 5px; border-radius: 4px; font-size: 12px; outline: none;
+}
+
+.preset-colors { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+.color-dot { border-radius: 2px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); height: 18px; }
+
+.layer-container { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 3px; margin-bottom: 5px; }
+.layer-item {
+    background: rgba(255,255,255,0.02); padding: 6px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: space-between; font-size: 11px; cursor: pointer;
+}
+.layer-item.active { background: rgba(59, 130, 246, 0.2); border: 1px solid var(--accent-color); }
+.layer-actions { display: flex; gap: 2px; }
+.layer-btn { background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 10px; padding: 2px; }
+
+.btn-flatten {
+    background: var(--accent-color); color: white; border: none; padding: 8px;
+    border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px;
+}
+
+.history-controls {
+    display: flex;
+    gap: 6px;
+}
+
+/* HIGH-PRIORITY TOOLTIP INTERACTIVE ENGINE */
+[data-tooltip] {
+    position: relative;
+}
+[data-tooltip]:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 125%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #000000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    z-index: 10000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    pointer-events: none;
+}
+.top-bar [data-tooltip]:hover::before {
+    left: 50%;
+    top: 130%;
+    transform: translateX(-50%);
+}
