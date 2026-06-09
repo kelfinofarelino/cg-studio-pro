@@ -82,8 +82,3 @@ npm run dev
 Buka alamat tautan http://localhost:5173 di browser Anda untuk mulai menggambar!
 
 ---
-
-## 📝 Kontribusi & Lisensi
-Proyek ini dibangun sebagai bagian dari eksplorasi mendalam di bidang Grafika Komputer. Seluruh kode dirancang dengan prinsip clean code dan modular agar mudah dipelajari kembali.
-
-Distributed under the MIT License. See LICENSE for more information.
