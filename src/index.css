@@ -216,3 +216,23 @@ select, input[type="range"], input[type="number"] {
     top: 130%;
     transform: translateX(-50%);
 }
+
+/* ========================================================
+   ANIMASI TRANSISI MASUK STUDIO THETADRAW
+   ======================================================== */
+.animate-studio-enter {
+  animation: studioFadeIn 0.7s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+}
+
+@keyframes studioFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.03); /* Datang dengan efek zoom-in halus dari belakang */
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}

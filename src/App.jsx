@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { EditorProvider, useEditor } from './context/EditorContext';
 import TopBar from './components/TopBar';
 import Toolbar from './components/Toolbar';
 import Canvas from './components/Canvas';
 import PropertyPanel from './components/PropertyPanel';
 import LayerPanel from './components/LayerPanel';
+import LandingPage from './components/LandingPage';
 
 function MainStudio() {
   const { layers, setLayers, setActiveLayerIndex, saveHistory } = useEditor();
@@ -14,16 +15,13 @@ function MainStudio() {
     const mainCanvas = document.querySelector('canvas');
     if (!mainCanvas) return;
     
-    // 1. Ambil snapshot visual kanvas saat ini lalu salin ke memori offscreen canvas
     const offscreen = document.createElement('canvas');
     offscreen.width = mainCanvas.width;
     offscreen.height = mainCanvas.height;
     offscreen.getContext('2d').drawImage(mainCanvas, 0, 0);
 
-    // 2. Hitung jumlah total layer flatten untuk penamaan dinamis otomatis
     const flattenCount = layers.filter(l => l.name.startsWith('Flatten')).length + 1;
     
-    // 3. Bangun struktur data objek layer Flatten baru
     const newFlattenedLayer = {
       type: 'FLATTENED',
       x: 0, y: 0,
@@ -31,11 +29,10 @@ function MainStudio() {
       rotation: 0, scaleX: 1, scaleY: 1, shearX: 0, shearY: 0,
       pivotX: mainCanvas.width / 2, pivotY: mainCanvas.height / 2,
       name: `Flatten ${flattenCount}`,
-      canvasRef: offscreen, // Mengunci gambar murni di dalam layer objek
+      canvasRef: offscreen,
       color: '#000000', thickness: 1, style: 'solid', algo: 'bresenham'
     };
 
-    // 4. Perbarui tumpukan stack layer (Alert sukses telah dihapus secara instan)
     const updatedLayers = [newFlattenedLayer];
     setLayers(updatedLayers);
     setActiveLayerIndex(0);
@@ -58,9 +55,39 @@ function MainStudio() {
 }
 
 export default function App() {
+  const [hasStarted, setHasStarted] = useState(false);
+  const [isExiting, setIsExiting] = useState(false); // State baru untuk trigger animasi keluar
+
+  // Fungsi interseptor tombol mulai dengan efek delay transisi
+  const handleStartTransition = () => {
+    setIsExiting(true); // 1. Jalankan efek animasi fade out + blur di CSS
+    setTimeout(() => {
+      setHasStarted(true); // 2. Setelah 600ms (animasi selesai), ganti ke halaman studio
+    }, 600);
+  };
+
   return (
     <EditorProvider>
-      <MainStudio />
+      <div style={{ backgroundColor: '#1a1c26', width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
+        {!hasStarted ? (
+          // Wrapper untuk membungkus LandingPage dengan transisi dinamis
+          <div style={{
+            opacity: isExiting ? 0 : 1,
+            filter: isExiting ? 'blur(20px)' : 'blur(0px)',
+            transform: isExiting ? 'scale(0.92)' : 'scale(1)',
+            transition: 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+            width: '100%',
+            height: '100%'
+          }}>
+            <LandingPage onStart={handleStartTransition} />
+          </div>
+        ) : (
+          // Wrapper saat MainStudio masuk, memicu keyframe CSS fade-in pro
+          <div className="animate-studio-enter" style={{ width: '100%', height: '100%' }}>
+            <MainStudio />
+          </div>
+        )}
+      </div>
     </EditorProvider>
   );
 }
