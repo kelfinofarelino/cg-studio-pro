@@ -6,17 +6,17 @@ export default function LandingPage({ onStart }) {
     { 
       name: "Muhammad Farelino Kelfin Ramadhani", 
       nim: "123240205", 
-      image: "/farel.png"
+      image: "farel.png"
     }, 
     { 
       name: "Dzaki Ghatfaan Abhipraya", 
       nim: "123240160 ", 
-      image: "/xaki.png"
+      image: "xaki.png"
     },         
     { 
       name: "Naufal Alwi Rizqillah", 
       nim: "123240215", 
-      image: "/nopal.png"
+      image: "nopal.png"
     }            
   ];
 
