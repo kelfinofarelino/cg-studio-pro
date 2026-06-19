@@ -1,3 +1,10 @@
+/**
+ * Penjelasan: Pustaka algoritma garis primitif.
+ * Fungsi: Berisi fungsi matematika murni (getPointsDDA, getPointsBresenham, dan getScanLinePixels). 
+ * Tugasnya menerima input titik kordinat ujung, lalu menghitung deretan titik piksel mana saja yang 
+ * harus diwarnai untuk membentuk garis lurus atau mengisi bangun datar (vektor-ke-piksel).
+ */
+
 export function getPointsDDA(x1, y1, x2, y2) {
   let points = [];
   let dx = x2 - x1;

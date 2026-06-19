@@ -2,6 +2,11 @@ import React from 'react';
 import { useEditor } from '../context/EditorContext';
 import { Undo2, Redo2, FlipHorizontal, FlipVertical } from 'lucide-react';
 
+/**
+ * Penjelasan: Panel kontrol di bagian atas.
+ * Fungsi: Menjalankan aksi global seperti Undo, Redo, Clear Canvas (menghapus semua layar), dan tombol unduh (Export to PNG).
+ */
+
 export default function TopBar() {
   const { 
     undo, redo, canUndo, canRedo, currentTool, currentShape, 

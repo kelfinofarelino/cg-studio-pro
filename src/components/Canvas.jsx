@@ -11,6 +11,13 @@ import { handleSelection } from '../tools/SelectTool';
 import { TOOLS } from '../utils/constants';
 
 /**
+ * Penjelasan: Jantung visual dari ThetaDraw, di sinilah API CanvasRenderingContext2D dari HTML5 bekerja.
+ * Fungsi: Menangkap pergerakan mouse pengguna (menggambar, menarik, atau menyeleksi objek). File ini 
+ * juga terus-menerus membersihkan layar dan menggambar ulang (redraw) seluruh tumpukan layer dari 
+ * EditorContext setiap ada perubahan data.
+ */
+
+/**
  * FUNGSI UTILITAS: deepCloneLayers
  * Melakukan kloning mendalam (deep clone) terhadap array layer.
  * Sangat krusial untuk memutus referensi memori (memory reference pointer) agar 

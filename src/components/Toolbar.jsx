@@ -4,6 +4,11 @@ import ToolButton from './ToolButton';
 import { TOOLS, SHAPES } from '../utils/constants';
 import { MousePointer, PenTool, Eraser, PaintBucket, Minus, Square, Triangle, Circle } from 'lucide-react';
 
+/**
+ * Penjelasan: Panel alat di sebelah kiri.
+ * Fungsi: Kumpulan tombol ikon untuk memilih mode interaksi (Cursor, Pen, Line, Rectangle, Circle, Bucket Fill).
+ */
+
 export default function Toolbar() {
   const { currentTool, setCurrentTool, currentShape, setCurrentShape, globalColor } = useEditor();
   const [activeDropdown, setActiveDropdown] = useState(null); // 'rect', 'triangle', 'ellipse'

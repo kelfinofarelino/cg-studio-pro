@@ -1,6 +1,12 @@
 import React from 'react';
 import { useEditor } from '../context/EditorContext';
 
+/**
+ * Penjelasan: Panel manajemen tumpukan di kanan bawah.
+ * Fungsi: Menampilkan daftar objek yang ada di layar berdasarkan urutan dari bawah ke atas. 
+ * Di sinilah letak tombol Flatten App yang memicu peleburan semua objek vektor menjadi satu kanvas bitmap.
+ */
+
 export default function LayerPanel({ onFlatten }) {
   const { layers, setLayers, activeLayerIndex, setActiveLayerIndex, deleteSelectedLayer } = useEditor();
 

@@ -3,6 +3,15 @@ export function executeFloodFill(canvas, startX, startY, fillColorHex) {
   const width = canvas.width;
   const height = canvas.height;
   
+/**
+ * Penjelasan: Pustaka algoritma raster ruang.
+
+  Fungsi: Berisi logika Ember Cat (Flood Fill). Algoritma ini 
+  menggunakan pendekatan Breadth-First Search (BFS) dengan antrean (queue) 
+  untuk membaca warna piksel langsung dari memori kanvas dan menyebarkan 
+  warna baru tanpa macet (stack overflow).
+ */
+
   // Batas aman koordinat klik agar tidak out-of-bounds
   if (startX < 0 || startX >= width || startY < 0 || startY >= height) return null;
   

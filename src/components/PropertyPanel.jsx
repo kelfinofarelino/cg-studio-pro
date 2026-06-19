@@ -3,6 +3,12 @@ import { useEditor } from '../context/EditorContext';
 import Slider from './Slider';
 import ColorPicker from './ColorPicker'; // Pastikan ColorPicker terimport
 
+/**
+ * Penjelasan: Panel pengaturan atribut di kanan atas.
+ * Fungsi: Mengatur properti objek yang sedang dipilih atau akan digambar, 
+ * seperti Color Picker, ketebalan stroke, dan gaya garis (solid/dashed).
+ */
+
 export default function PropertyPanel() {
   const { lineStyle, setLineStyle, strokeWidth, setStrokeWidth, rasterAlgo } = useEditor();
 

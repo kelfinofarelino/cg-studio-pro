@@ -1,6 +1,7 @@
 /**
- * THETADRAW GEOMETRY ENGINE
- * Mengalkulasi proyeksi matriks 2D dan struktur koordinat bentuk geometris
+ * Penjelasan: Kalkulator matriks transformasi.
+ * Fungsi: Menghitung perkalian matriks 2D untuk memanipulasi posisi objek (Translasi), 
+ * ukuran (Scaling), perputaran (Rotasi), dan pemiringan (Shearing).
  */
 
 // Menghitung posisi nyata 8 kotak handle di layar setelah dikenakan transformasi matriks (Screen-Space)
