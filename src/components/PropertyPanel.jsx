@@ -10,7 +10,7 @@ import ColorPicker from './ColorPicker'; // Pastikan ColorPicker terimport
  */
 
 export default function PropertyPanel() {
-  const { lineStyle, setLineStyle, strokeWidth, setStrokeWidth, rasterAlgo } = useEditor();
+const { lineStyle, setLineStyle, strokeWidth, setStrokeWidth, rasterAlgo, setRasterAlgo } = useEditor();
 
   return (
     <div className="panel right-top-panel">
