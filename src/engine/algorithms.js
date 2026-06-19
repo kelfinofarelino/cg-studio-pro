@@ -47,3 +47,51 @@ export function getPointsBresenham(x1, y1, x2, y2) {
   }
   return points;
 }
+
+/**
+ * ALGORITMA SCAN-LINE POLYGON FILL
+ * Mewarnai area dalam poligon menggunakan perhitungan garis pindai horizontal.
+ */
+export function getScanLinePixels(vertices) {
+  let pixels = [];
+  if (vertices.length < 3) return pixels;
+
+  // 1. Cari batas atas (minY) dan batas bawah (maxY) dari bangun datar
+  let minY = Math.min(...vertices.map(v => v.y));
+  let maxY = Math.max(...vertices.map(v => v.y));
+
+  // 2. Lakukan pemindaian (Scanning) dari baris paling atas ke paling bawah
+  for (let y = Math.floor(minY); y <= Math.ceil(maxY); y++) {
+    let intersections = [];
+
+    // 3. Cari titik potong garis horizontal (scan-line) dengan sisi-sisi bangun
+    for (let i = 0; i < vertices.length; i++) {
+      let p1 = vertices[i];
+      let p2 = vertices[(i + 1) % vertices.length]; // Titik selanjutnya (melingkar)
+
+      if (p1.y === p2.y) continue; // Abaikan garis yang benar-benar mendatar
+
+      if (y >= Math.min(p1.y, p2.y) && y <= Math.max(p1.y, p2.y)) {
+        // Rumus interpolasi linear untuk mencari nilai X pada titik potong Y
+        let x = p1.x + ((y - p1.y) * (p2.x - p1.x)) / (p2.y - p1.y);
+        intersections.push(x);
+      }
+    }
+
+    // 4. Urutkan titik potong dari kiri ke kanan berdasarkan sumbu X
+    intersections.sort((a, b) => a - b);
+
+    // 5. Isi piksel di antara pasangan titik potong (kiri ke kanan)
+    for (let i = 0; i < intersections.length; i += 2) {
+      if (intersections[i + 1] !== undefined) {
+        let startX = Math.floor(intersections[i]);
+        let endX = Math.floor(intersections[i + 1]);
+        for (let x = startX; x <= endX; x++) {
+          pixels.push({ x, y });
+        }
+      }
+    }
+  }
+
+  return pixels;
+}
